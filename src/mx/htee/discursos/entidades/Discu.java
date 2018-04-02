@@ -30,24 +30,46 @@ public class Discu {
     }
    
     public static void main(String[] args) {
+        Discu dis = new Discu();
+        
+        List<Tema> te = new ArrayList<Tema>();
         ITemaNegocio nt = new TemaNegocio();
         Tema t = new Tema();
-        t.setId(3);
+        t.setId(4);
         t.setNombre("litu");
-        List<Tema> te = new ArrayList<Tema>();
         
-        Discu dis = new Discu();
-        IDiscursoNegocio dn = new DiscursoNegocio();
+        
         List<Discurso> lDiscurso = new ArrayList<Discurso>();
+        IDiscursoNegocio dn = new DiscursoNegocio();
+        Discurso d = new Discurso();
+        d.setId(3);
+        d.setNombre("El odio");
+        d.setNumero(154);
+        d.setTemaa(t);
         
         
-        dn.agregarDiscurso("El amor", t, 34);
-        lDiscurso = dn.buscarDiscursoPor("id", "", 2, 0);
         
-        for(Discurso listD : dn.traerTodosDis()){
+        
+
+        
+        
+        
+        
+        
             
-        }
+            
         
+        
+        /**
+         * dn.agregarDiscurso("El amor", t, 34);
+         * lDiscurso = dn.buscarDiscursoPor("numero", "amo", 3, 34);
+         * dn.editarDiscurso(d);
+         * dn.eliminarDiscurso(5);
+         * 
+         * for(Discurso listD : dn.traerTodosDis()){
+         * System.out.println("id: "+ listD.getId() + " nombre: "+ listD.getNombre());
+         * }
+         */
         
         
         /** METODOS de TEMA

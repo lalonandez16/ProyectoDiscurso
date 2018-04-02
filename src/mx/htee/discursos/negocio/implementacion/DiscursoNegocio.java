@@ -60,7 +60,7 @@ public class DiscursoNegocio implements IDiscursoNegocio{
     {
         boolean resultado = true;
         
-        String q = "DELETE FROM tema WHERE id=?";
+        String q = "DELETE FROM discurso WHERE id=?";
         try
         {
             PreparedStatement pstm = db.connect().prepareStatement(q);
@@ -86,12 +86,13 @@ public class DiscursoNegocio implements IDiscursoNegocio{
         
         try
         {
-            String q = "UPDATE discurso SET nombre = ?, idTema = ? WHERE id=?";
+            String q = "UPDATE discurso SET nombre = ?, idTema = ?, numero = ? WHERE id=?";
             PreparedStatement pstm = db.connect().prepareStatement(q);
             
             pstm.setString(1, disc.getNombre());
             pstm.setInt(2, disc.getTemaa().getId());
-            pstm.setInt(3, disc.getId());
+            pstm.setInt(3, disc.getNumero());
+            pstm.setInt(4, disc.getId());
             
             resultado = pstm.execute();
             pstm.close();
@@ -112,7 +113,7 @@ public class DiscursoNegocio implements IDiscursoNegocio{
         List<Discurso> lDiscurso = new ArrayList<Discurso>();
         ITemaNegocio tn = new TemaNegocio();
         
-        String q = "SELECT * FROM discurso WHERE nombre LIKE '%?%'";
+        
         String w = "SELECT * FROM discurso WHERE id = ?";
         String e = "SELECT * FROM discurso WHERE numero = ?";
         
@@ -120,14 +121,16 @@ public class DiscursoNegocio implements IDiscursoNegocio{
         {
             if(categoria == "nombre")
             {
+                String q = "SELECT * FROM discurso WHERE nombre LIKE '%"+nombreD+"%'";
                 PreparedStatement pstm = db.connect().prepareStatement(q);
-                pstm.setString(1, nombreD);
+                //pstm.setString(1, nombreD);
                 
                 ResultSet rs= pstm.executeQuery();
-                Discurso dis = new Discurso();
+                
                 
                 while(rs.next())
                 {
+                    Discurso dis = new Discurso();
                     dis.setId(rs.getInt("id"));
                     dis.setNombre(rs.getString("nombre"));
                     dis.setNumero(rs.getInt("numero"));
@@ -146,11 +149,12 @@ public class DiscursoNegocio implements IDiscursoNegocio{
                 pstm.setInt(1, idD);
                 
                 ResultSet rs = pstm.executeQuery();
-                Discurso dis = new Discurso();
+                
                 
                 while(rs.next())
                 {
                     
+                    Discurso dis = new Discurso();
                     dis.setId(rs.getInt("id"));
                     dis.setNombre(rs.getString("nombre"));
                     dis.setNumero(rs.getInt("numero"));
@@ -170,10 +174,11 @@ public class DiscursoNegocio implements IDiscursoNegocio{
                pstm.setInt(1, numeroD);
                
                ResultSet rs = pstm.executeQuery();
-               Discurso dis = new Discurso();
+               
                
                while(rs.next())
                {
+                   Discurso dis = new Discurso();
                    dis.setId(rs.getInt("id"));
                    dis.setNombre(rs.getString("nombre"));
                    dis.setNumero(rs.getInt("numero"));
@@ -201,7 +206,7 @@ public class DiscursoNegocio implements IDiscursoNegocio{
     
     public List<Discurso> traerTodosDis(){
         List<Discurso> disc = new ArrayList<Discurso>();
-        Discurso dis = new Discurso();
+        
         ITemaNegocio tn = new TemaNegocio();
         
         String q = "SELECT * FROM discurso";
@@ -212,6 +217,7 @@ public class DiscursoNegocio implements IDiscursoNegocio{
             ResultSet rs = pstm.executeQuery();
             while(rs.next())
             {
+                Discurso dis = new Discurso();
                 dis.setId(rs.getInt("id"));
                 dis.setNombre(rs.getString("nombre"));
                 dis.setNumero(rs.getInt("numero"));

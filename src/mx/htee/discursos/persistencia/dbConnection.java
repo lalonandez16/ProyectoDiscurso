@@ -19,7 +19,7 @@ public class dbConnection {
     
     private String db =   "beshopping_discurso"; 
     private String user = "beshopping_lalo";
-    private String password = "**";
+    private String password = "Atalaya123";
     private String url = "jdbc:mysql://1a.ncomputers.org:3306/" + db;
     private Connection conn = null;
     
